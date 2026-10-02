@@ -1,488 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Admin Dashboard | Singhania And Sons Films</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
 
         body {
-            background: #f4f5f7;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             color: #222;
         }
-
-        /* HEADER */
 
         header {
             background: #111;
             color: white;
-            text-align: center;
-            padding: 25px 15px;
+            padding: 22px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header h1 {
+        .brand h1 {
             color: #d4af37;
+            font-size: 24px;
+        }
+
+        .brand p {
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .logout {
+            background: #d4af37;
+            color: #111;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
             font-size: 30px;
             margin-bottom: 8px;
         }
 
-        header p {
-            font-size: 17px;
+        .welcome p {
+            color: #666;
         }
 
-        /* CONTAINER */
-
-        .container {
-            width: 95%;
-            max-width: 1200px;
-            margin: 35px auto;
-        }
-
-        /* STAT CARDS */
-
-        .stats {
+        .cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
-        .stat-card {
-            background: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .stat-card h2 {
-            font-size: 35px;
-            color: #d4af37;
-            margin-bottom: 8px;
-        }
-
-        .stat-card p {
-            font-size: 17px;
-            color: #555;
-        }
-
-        /* ATTENDANCE BOX */
-
-        .attendance-box {
+        .card {
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
         }
 
-        .attendance-box h2 {
-            margin-bottom: 20px;
-            font-size: 25px;
+        .card h3 {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 12px;
         }
 
-        /* TABLE */
+        .number {
+            font-size: 38px;
+            font-weight: bold;
+            color: #111;
+        }
 
-        .table-wrapper {
+        .working {
+            color: #168a3b;
+        }
+
+        .table-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
             overflow-x: auto;
+        }
+
+        .table-box h2 {
+            margin-bottom: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 900px;
+            min-width: 850px;
         }
 
         th {
             background: #111;
-            color: white;
+            color: #d4af37;
             padding: 14px 10px;
-            text-align: center;
-            font-size: 14px;
+            text-align: left;
         }
 
         td {
             padding: 13px 10px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-            font-size: 14px;
+            border-bottom: 1px solid #eee;
         }
 
         tr:hover {
-            background: #f8f8f8;
+            background: #fafafa;
         }
 
-        /* STATUS */
+        .present {
+            color: #168a3b;
+            font-weight: bold;
+        }
+
+        .left {
+            color: #555;
+        }
 
         .status-working {
-            display: inline-block;
-            background: #16a34a;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+            color: #168a3b;
             font-weight: bold;
         }
-
-        .status-completed {
-            display: inline-block;
-            background: #555;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .location {
-            color: #16a34a;
-            font-weight: bold;
-        }
-
-        .no-records {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-            font-size: 17px;
-        }
-
-        /* LOGOUT */
-
-        .logout-area {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .logout-btn {
-            display: inline-block;
-            text-decoration: none;
-            background: #dc2626;
-            color: white;
-            padding: 13px 28px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .logout-btn:hover {
-            background: #b91c1c;
-        }
-
-        /* FOOTER */
 
         footer {
             background: #111;
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+            padding: 22px;
+            margin-top: 30px;
         }
 
         footer p {
             margin: 5px;
-            color: #ccc;
         }
 
-        /* MOBILE */
+        @media (max-width: 800px) {
 
-        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
 
-            .stats {
+            .cards {
                 grid-template-columns: 1fr;
             }
 
-            header h1 {
-                font-size: 23px;
+            .welcome h2 {
+                font-size: 25px;
             }
 
             .container {
-                width: 94%;
+                padding: 25px 12px;
             }
-
-            .attendance-box {
-                padding: 15px;
-            }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- HEADER -->
-
 <header>
 
-    <h1>
-        SINGHANIA AND SONS FILMS
-    </h1>
+    <div class="brand">
+        <h1>SINGHANIA AND SONS FILMS</h1>
+        <p>PRIVATE LIMITED</p>
+    </div>
 
-    <p>
-        Admin Attendance Dashboard
-    </p>
+    <a href="/logout" class="logout">
+        Logout
+    </a>
 
 </header>
 
 
-
-<!-- MAIN -->
-
 <div class="container">
 
+    <div class="welcome">
+        <h2>👨‍💼 Admin Dashboard</h2>
+        <p>Attendance Management System</p>
+    </div>
 
-    <!-- STATISTICS -->
 
-    <div class="stats">
+    <!-- SUMMARY CARDS -->
 
+    <div class="cards">
 
-        <div class="stat-card">
-
-            <h2>
+        <div class="card">
+            <h3>Total Attendance Records</h3>
+            <div class="number">
                 {{ total }}
-            </h2>
-
-            <p>
-                Total Attendance
-            </p>
-
+            </div>
         </div>
 
 
-
-        <div class="stat-card">
-
-            <h2>
+        <div class="card">
+            <h3>Present Staff</h3>
+            <div class="number present">
                 {{ present }}
-            </h2>
-
-            <p>
-                Present
-            </p>
-
+            </div>
         </div>
 
 
-
-        <div class="stat-card">
-
-            <h2>
+        <div class="card">
+            <h3>Currently Working</h3>
+            <div class="number working">
                 {{ working }}
-            </h2>
-
-            <p>
-                Currently Working
-            </p>
-
+            </div>
         </div>
 
-
     </div>
 
 
+    <!-- ATTENDANCE TABLE -->
 
-    <!-- ATTENDANCE -->
+    <div class="table-box">
 
-    <div class="attendance-box">
+        <h2>📋 Attendance Records</h2>
 
-        <h2>
-            📊 Staff Attendance
-        </h2>
+        {% if records %}
 
+        <table>
 
-        <div class="table-wrapper">
+            <thead>
 
-            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Hotel</th>
+                    <th>Date</th>
+                    <th>Arrival Time</th>
+                    <th>Leaving Time</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
 
-                <thead>
+            </thead>
 
-                    <tr>
 
-                        <th>
-                            Staff Name
-                        </th>
+            <tbody>
 
-                        <th>
-                            Hotel
-                        </th>
+                {% for record in records %}
 
-                        <th>
-                            Date
-                        </th>
+                <tr>
 
-                        <th>
-                            Arrival
-                        </th>
+                    <td>
+                        {{ record["id"] }}
+                    </td>
 
-                        <th>
-                            Leaving
-                        </th>
+                    <td>
+                        {{ record["name"] }}
+                    </td>
 
-                        <th>
-                            Status
-                        </th>
+                    <td>
+                        {{ record["hotel"] }}
+                    </td>
 
-                        <th>
-                            Location
-                        </th>
+                    <td>
+                        {{ record["date"] }}
+                    </td>
 
-                    </tr>
+                    <td>
+                        {{ record["arrival_time"] or "-" }}
+                    </td>
 
-                </thead>
+                    <td>
+                        {{ record["leaving_time"] or "-" }}
+                    </td>
 
+                    <td>
 
-                <tbody>
+                        {% if record["latitude"] and record["longitude"] %}
 
+                            📍 Verified
 
-                    {% if records %}
+                        {% else %}
 
+                            Not Verified
 
-                        {% for record in records %}
+                        {% endif %}
 
-                        <tr>
+                    </td>
 
+                    <td>
 
-                            <!-- STAFF NAME -->
+                        {% if record["arrival_time"] and not record["leaving_time"] %}
 
-                            <td>
-                                {{ record["name"] }}
-                            </td>
+                            <span class="status-working">
+                                Working
+                            </span>
 
+                        {% elif record["leaving_time"] %}
 
-                            <!-- HOTEL -->
+                            <span class="left">
+                                Completed
+                            </span>
 
-                            <td>
-                                {{ record["hotel"] }}
-                            </td>
+                        {% else %}
 
+                            -
 
-                            <!-- DATE -->
+                        {% endif %}
 
-                            <td>
-                                {{ record["date"] }}
-                            </td>
+                    </td>
 
+                </tr>
 
-                            <!-- ARRIVAL -->
+                {% endfor %}
 
-                            <td>
-                                {{ record["arrival_time"] or "-" }}
-                            </td>
+            </tbody>
 
+        </table>
 
-                            <!-- LEAVING -->
+        {% else %}
 
-                            <td>
-                                {{ record["leaving_time"] or "-" }}
-                            </td>
+        <p style="color:#666; text-align:center; padding:30px;">
+            No attendance records available.
+        </p>
 
-
-                            <!-- STATUS -->
-
-                            <td>
-
-                                {% if record["leaving_time"] %}
-
-                                    <span class="status-completed">
-                                        COMPLETED
-                                    </span>
-
-                                {% else %}
-
-                                    <span class="status-working">
-                                        WORKING
-                                    </span>
-
-                                {% endif %}
-
-                            </td>
-
-
-                            <!-- LOCATION -->
-
-                            <td>
-
-                                {% if record["latitude"] and record["longitude"] %}
-
-                                    <span class="location">
-                                        ✓ Verified
-                                    </span>
-
-                                {% else %}
-
-                                    -
-
-                                {% endif %}
-
-                            </td>
-
-
-                        </tr>
-
-                        {% endfor %}
-
-
-                    {% else %}
-
-
-                        <tr>
-
-                            <td colspan="7" class="no-records">
-
-                                No attendance records found.
-
-                            </td>
-
-                        </tr>
-
-
-                    {% endif %}
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
+        {% endif %}
 
     </div>
-
-
-
-    <!-- LOGOUT -->
-
-    <div class="logout-area">
-
-        <a
-            href="/logout"
-            class="logout-btn">
-
-            Logout
-
-        </a>
-
-    </div>
-
 
 </div>
 
-
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -494,9 +356,12 @@
         Mumbai, Maharashtra
     </p>
 
+    <p>
+        📞 +91 98700 00667 &nbsp; | &nbsp;
+        📞 +91 99263 09403
+    </p>
+
 </footer>
 
-
 </body>
-
 </html>
