@@ -1,13 +1,12 @@
 {
-  "name": "Singhania Staff Attendance",
-  "short_name": "Singhania Staff",
-  "description": "Staff attendance and location verification app for Singhania And Sons Films Private Limited",
+  "name": "Singhania And Sons Films Private Limited",
+  "short_name": "Singhania Staffing",
+  "description": "Professional staffing solutions for hotels, restaurants, banquets and events.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#111111",
-  "theme_color": "#111111",
+  "theme_color": "#d4af37",
   "orientation": "portrait",
-  "scope": "/",
   "icons": [
     {
       "src": "/static/icon-192.png",
