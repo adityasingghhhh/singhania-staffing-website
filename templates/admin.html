@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Singhania And Sons Films</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f5f7;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            color: #d4af37;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 17px;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        /* STAT CARDS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h2 {
+            font-size: 35px;
+            color: #d4af37;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 17px;
+            color: #555;
+        }
+
+        /* ATTENDANCE BOX */
+
+        .attendance-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .attendance-box h2 {
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th {
+            background: #111;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 13px 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8f8f8;
+        }
+
+        /* STATUS */
+
+        .status-working {
+            display: inline-block;
+            background: #16a34a;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .status-completed {
+            display: inline-block;
+            background: #555;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .location {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .no-records {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-size: 17px;
+        }
+
+        /* LOGOUT */
+
+        .logout-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logout-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #dc2626;
+            color: white;
+            padding: 13px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 5px;
+            color: #ccc;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .attendance-box {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>
+        SINGHANIA AND SONS FILMS
+    </h1>
+
+    <p>
+        Admin Attendance Dashboard
+    </p>
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ total }}
+            </h2>
+
+            <p>
+                Total Attendance
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ present }}
+            </h2>
+
+            <p>
+                Present
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ working }}
+            </h2>
+
+            <p>
+                Currently Working
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ATTENDANCE -->
+
+    <div class="attendance-box">
+
+        <h2>
+            📊 Staff Attendance
+        </h2>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Staff Name
+                        </th>
+
+                        <th>
+                            Hotel
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Arrival
+                        </th>
+
+                        <th>
+                            Leaving
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Location
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% if records %}
+
+
+                        {% for record in records %}
+
+                        <tr>
+
+
+                            <!-- STAFF NAME -->
+
+                            <td>
+                                {{ record["name"] }}
+                            </td>
+
+
+                            <!-- HOTEL -->
+
+                            <td>
+                                {{ record["hotel"] }}
+                            </td>
+
+
+                            <!-- DATE -->
+
+                            <td>
+                                {{ record["date"] }}
+                            </td>
+
+
+                            <!-- ARRIVAL -->
+
+                            <td>
+                                {{ record["arrival_time"] or "-" }}
+                            </td>
+
+
+                            <!-- LEAVING -->
+
+                            <td>
+                                {{ record["leaving_time"] or "-" }}
+                            </td>
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if record["leaving_time"] %}
+
+                                    <span class="status-completed">
+                                        COMPLETED
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-working">
+                                        WORKING
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- LOCATION -->
+
+                            <td>
+
+                                {% if record["latitude"] and record["longitude"] %}
+
+                                    <span class="location">
+                                        ✓ Verified
+                                    </span>
+
+                                {% else %}
+
+                                    -
+
+                                {% endif %}
+
+                            </td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <tr>
+
+                            <td colspan="7" class="no-records">
+
+                                No attendance records found.
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endif %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- LOGOUT -->
+
+    <div class="logout-area">
+
+        <a
+            href="/logout"
+            class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Singhania And Sons Films Private Limited
+    </p>
+
+    <p>
+        Mumbai, Maharashtra
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

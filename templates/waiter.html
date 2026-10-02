@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Waiter Attendance | Singhania And Sons Films</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            color: #d4af37;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 17px;
+        }
+
+        .container {
+            min-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .attendance-box {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+        }
+
+        .attendance-box h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #d4af37;
+        }
+
+        button {
+            width: 100%;
+            padding: 17px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .location-btn {
+            background: #555;
+            color: white;
+        }
+
+        .location-btn:hover {
+            background: #333;
+        }
+
+        .arrival-btn {
+            background: #00c800;
+            color: white;
+        }
+
+        .arrival-btn:hover {
+            background: #00a800;
+        }
+
+        .leave-btn {
+            background: #e00000;
+            color: white;
+        }
+
+        .leave-btn:hover {
+            background: #bd0000;
+        }
+
+        .location-status {
+            margin: 0 0 15px 0;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #16a34a;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 5px;
+            color: #ccc;
+        }
+
+        @media (max-width: 600px) {
+
+            .attendance-box {
+                padding: 25px 20px;
+            }
+
+            .attendance-box h2 {
+                font-size: 25px;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        SINGHANIA AND SONS FILMS
+    </h1>
+
+    <p>
+        Waiter Attendance
+    </p>
+
+</header>
+
+
+<div class="container">
+
+    <div class="attendance-box">
+
+        <h2>
+            👨‍🍳 Staff Attendance
+        </h2>
+
+
+        <!-- NAME -->
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter Your Name"
+        >
+
+
+        <!-- HOTEL -->
+
+        <input
+            type="text"
+            id="hotel"
+            placeholder="Hotel / Restaurant Name"
+        >
+
+
+        <!-- LOCATION -->
+
+        <button
+            type="button"
+            class="location-btn"
+            id="locationButton"
+            onclick="getLocation()">
+
+            📍 Verify My Location
+
+        </button>
+
+
+        <div
+            id="locationStatus"
+            class="location-status">
+        </div>
+
+
+        <!-- ARRIVAL -->
+
+        <button
+            type="button"
+            class="arrival-btn"
+            onclick="markArrival()">
+
+            🟢 I HAVE ARRIVED
+
+        </button>
+
+
+        <!-- LEAVING -->
+
+        <button
+            type="button"
+            class="leave-btn"
+            onclick="markLeaving()">
+
+            🔴 I HAVE LEFT
+
+        </button>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 Singhania And Sons Films Private Limited
+    </p>
+
+    <p>
+        Mumbai, Maharashtra
+    </p>
+
+</footer>
+
+
+<script>
+
+
+// ======================================================
+// LOCATION VARIABLES
+// ======================================================
+
+let currentLatitude = null;
+let currentLongitude = null;
+
+let locationVerified = false;
+
+
+// ======================================================
+// VERIFY LOCATION
+// ======================================================
+
+function getLocation() {
+
+    const status = document.getElementById("locationStatus");
+
+    const button = document.getElementById("locationButton");
+
+
+    status.className = "location-status";
+
+    status.innerHTML = "📍 Getting your location...";
+
+
+    if (!navigator.geolocation) {
+
+        status.className = "location-status error";
+
+        status.innerHTML =
+            "❌ Location is not supported by this browser.";
+
+        return;
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            currentLatitude =
+                position.coords.latitude;
+
+            currentLongitude =
+                position.coords.longitude;
+
+
+            locationVerified = true;
+
+
+            console.log(
+                "Latitude:",
+                currentLatitude
+            );
+
+            console.log(
+                "Longitude:",
+                currentLongitude
+            );
+
+
+            status.className =
+                "location-status success";
+
+            status.innerHTML =
+                "☑ Location Verified";
+
+
+            button.innerHTML =
+                "📍 Location Verified";
+
+        },
+
+
+        function(error) {
+
+            currentLatitude = null;
+
+            currentLongitude = null;
+
+            locationVerified = false;
+
+
+            status.className =
+                "location-status error";
+
+
+            status.innerHTML =
+                "❌ Unable to verify location. Please allow location access.";
+
+        },
+
+        {
+
+            enableHighAccuracy: true,
+
+            timeout: 15000,
+
+            maximumAge: 0
+
+        }
+
+    );
+
+}
+
+
+// ======================================================
+// ARRIVAL
+// ======================================================
+
+async function markArrival() {
+
+
+    const name =
+        document.getElementById("name").value.trim();
+
+
+    const hotel =
+        document.getElementById("hotel").value.trim();
+
+
+    const message =
+        document.getElementById("message");
+
+
+    message.className = "message";
+
+
+    // Check name
+
+    if (!name) {
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Please enter your name.";
+
+        return;
+    }
+
+
+    // Check hotel
+
+    if (!hotel) {
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Please enter hotel / restaurant name.";
+
+        return;
+    }
+
+
+    // Check location
+
+    if (
+        !locationVerified ||
+        currentLatitude === null ||
+        currentLongitude === null
+    ) {
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Please verify your location first.";
+
+        return;
+    }
+
+
+    message.innerHTML =
+        "Saving arrival...";
+
+
+    try {
+
+
+        const response =
+            await fetch("/arrive", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    name: name,
+
+                    hotel: hotel,
+
+                    latitude: currentLatitude,
+
+                    longitude: currentLongitude
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (data.success) {
+
+            message.className =
+                "message success";
+
+            message.innerHTML =
+                "🟢 " + data.message;
+
+        } else {
+
+            message.className =
+                "message error";
+
+            message.innerHTML =
+                "❌ " + data.message;
+
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Something went wrong.";
+
+    }
+
+}
+
+
+// ======================================================
+// LEAVING
+// ======================================================
+
+async function markLeaving() {
+
+
+    const name =
+        document.getElementById("name").value.trim();
+
+
+    const hotel =
+        document.getElementById("hotel").value.trim();
+
+
+    const message =
+        document.getElementById("message");
+
+
+    message.className = "message";
+
+
+    if (!name) {
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Please enter your name.";
+
+        return;
+    }
+
+
+    if (!hotel) {
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Please enter hotel / restaurant name.";
+
+        return;
+    }
+
+
+    message.innerHTML =
+        "Saving leaving time...";
+
+
+    try {
+
+
+        const response =
+            await fetch("/leave", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    name: name,
+
+                    hotel: hotel
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (data.success) {
+
+            message.className =
+                "message success";
+
+            message.innerHTML =
+                "🔴 " + data.message;
+
+        } else {
+
+            message.className =
+                "message error";
+
+            message.innerHTML =
+                "❌ " + data.message;
+
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        message.className =
+            "message error";
+
+        message.innerHTML =
+            "❌ Something went wrong.";
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
