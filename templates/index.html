@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,39 +9,41 @@
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            background: #111;
+            color: white;
         }
 
         header {
-            background: #111;
-            color: white;
-            padding: 25px 20px;
             text-align: center;
+            padding: 30px 15px;
+            background: #111;
         }
 
         header h1 {
             color: #d4af37;
-            font-size: 30px;
-            margin-bottom: 5px;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
         header p {
-            font-size: 17px;
+            font-size: 18px;
         }
 
         .hero {
-            background: #111;
-            color: white;
             text-align: center;
             padding: 80px 20px;
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .hero h2 {
@@ -54,26 +57,26 @@
 
         .hero p {
             font-size: 18px;
+            margin-bottom: 40px;
             max-width: 750px;
-            margin: auto;
-            line-height: 1.6;
         }
 
-        .login-buttons {
-            margin-top: 35px;
+        .buttons {
             display: flex;
-            justify-content: center;
             gap: 20px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .login-buttons a {
+        .btn {
+            display: inline-block;
             text-decoration: none;
-            padding: 16px 35px;
-            border-radius: 8px;
+            padding: 17px 35px;
+            border-radius: 10px;
             font-size: 18px;
             font-weight: bold;
-            display: inline-block;
+            min-width: 190px;
+            text-align: center;
         }
 
         .admin-btn {
@@ -86,26 +89,12 @@
             color: white;
         }
 
-        .services {
-            background: white;
-            text-align: center;
-            padding: 70px 20px;
-        }
-
-        .services h2 {
-            font-size: 35px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .services p {
-            font-size: 18px;
-            color: #666;
+        .btn:hover {
+            opacity: 0.85;
         }
 
         footer {
-            background: #111;
-            color: white;
+            background: #000;
             text-align: center;
             padding: 25px;
         }
@@ -119,17 +108,18 @@
                 font-size: 30px;
             }
 
-            header h1 {
-                font-size: 24px;
+            .hero p {
+                font-size: 16px;
             }
 
-            .login-buttons {
+            .buttons {
                 flex-direction: column;
-                align-items: center;
+                width: 100%;
+                max-width: 300px;
             }
 
-            .login-buttons a {
-                width: 220px;
+            .btn {
+                width: 100%;
             }
         }
     </style>
@@ -137,51 +127,43 @@
 
 <body>
 
-    <header>
-        <h1>SINGHANIA AND SONS FILMS</h1>
-        <p>PRIVATE LIMITED</p>
-    </header>
+<header>
+    <h1>SINGHANIA AND SONS FILMS</h1>
+    <p>PRIVATE LIMITED</p>
+</header>
 
-    <section class="hero">
+<section class="hero">
 
-        <h2>
-            Professional Staffing for
-            <span>Hotels, Restaurants & Banquets</span>
-        </h2>
+    <h2>
+        Professional Staffing for
+        <span>Hotels, Restaurants & Banquets</span>
+    </h2>
 
-        <p>
-            Reliable and trained manpower solutions for hotels,
-            restaurants, banquets and events.
-        </p>
+    <p>
+        Reliable and trained manpower solutions for hotels,
+        restaurants, banquets and events.
+    </p>
 
-        <div class="login-buttons">
+    <div class="buttons">
 
-            <!-- ADMIN LOGIN -->
-            <a href="/admin-login" class="admin-btn">
-                👨‍💼 Admin Login
-            </a>
+        <!-- ADMIN LOGIN -->
+        <a href="/admin-login" class="btn admin-btn">
+            👨‍💼 Admin Login
+        </a>
 
-            <!-- WAITER LOGIN -->
-            <a href="/waiter-login" class="waiter-btn">
-                👨‍🍳 Waiter Login
-            </a>
+        <!-- WAITER LOGIN -->
+        <a href="/waiter-login" class="btn waiter-btn">
+            👨‍🍳 Waiter Login
+        </a>
 
-        </div>
+    </div>
 
-    </section>
+</section>
 
-    <section class="services">
-        <h2>Our Services</h2>
-
-        <p>
-            Professional manpower solutions for hospitality businesses.
-        </p>
-    </section>
-
-    <footer>
-        <p>© 2026 Singhania And Sons Films Private Limited</p>
-        <p>Mumbai, Maharashtra</p>
-    </footer>
+<footer>
+    <p>© 2026 Singhania And Sons Films Private Limited</p>
+    <p>Mumbai, Maharashtra</p>
+</footer>
 
 </body>
 </html>
