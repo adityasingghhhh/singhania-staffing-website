@@ -5,7 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Singhania And Sons Films</title>
+    <title>Singhania And Sons Films Private Limited</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest"
+          href="{{ url_for('static', filename='manifest.json') }}">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#d4af37">
+
+    <!-- Apple / iPhone PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title"
+          content="Singhania Staffing">
+
+    <link rel="apple-touch-icon"
+          href="{{ url_for('static', filename='icon-192.png') }}">
 
     <style>
         * {
@@ -16,39 +32,38 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #111;
-            color: white;
+            background: #f5f5f5;
+            color: #111;
         }
 
         header {
-            text-align: center;
-            padding: 30px 15px;
             background: #111;
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
         }
 
         header h1 {
             color: #d4af37;
-            font-size: 32px;
+            font-size: 34px;
             margin-bottom: 8px;
         }
 
         header p {
             font-size: 18px;
+            color: white;
         }
 
         .hero {
+            background: #111;
+            color: white;
             text-align: center;
-            padding: 80px 20px;
-            min-height: 65vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 55px 20px 70px;
         }
 
         .hero h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
+            font-size: 38px;
+            margin-bottom: 15px;
         }
 
         .hero h2 span {
@@ -57,26 +72,25 @@
 
         .hero p {
             font-size: 18px;
-            margin-bottom: 40px;
-            max-width: 750px;
+            margin-bottom: 35px;
+            color: #ddd;
         }
 
         .buttons {
             display: flex;
-            gap: 20px;
             justify-content: center;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         .btn {
             display: inline-block;
             text-decoration: none;
-            padding: 17px 35px;
-            border-radius: 10px;
+            padding: 16px 45px;
+            border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
-            min-width: 190px;
-            text-align: center;
+            transition: 0.3s;
         }
 
         .admin-btn {
@@ -84,42 +98,89 @@
             color: #111;
         }
 
+        .admin-btn:hover {
+            background: #b8941f;
+        }
+
         .waiter-btn {
             background: #2196f3;
             color: white;
         }
 
-        .btn:hover {
-            opacity: 0.85;
+        .waiter-btn:hover {
+            background: #1976d2;
+        }
+
+        .services {
+            background: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .services h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .services p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .service-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .service-box {
+            width: 250px;
+            padding: 25px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .service-box h3 {
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .service-box p {
+            font-size: 14px;
         }
 
         footer {
-            background: #000;
+            background: #111;
+            color: white;
             text-align: center;
-            padding: 25px;
-        }
-
-        footer p {
-            margin: 5px;
+            padding: 25px 15px;
+            font-size: 15px;
         }
 
         @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
             .hero h2 {
-                font-size: 30px;
+                font-size: 28px;
             }
 
             .hero p {
-                font-size: 16px;
-            }
-
-            .buttons {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
+                font-size: 15px;
             }
 
             .btn {
-                width: 100%;
+                width: 90%;
+                max-width: 320px;
+            }
+
+            .service-box {
+                width: 90%;
             }
         }
     </style>
@@ -127,43 +188,99 @@
 
 <body>
 
-<header>
-    <h1>SINGHANIA AND SONS FILMS</h1>
-    <p>PRIVATE LIMITED</p>
-</header>
+    <header>
+        <h1>SINGHANIA AND SONS FILMS</h1>
+        <p>PRIVATE LIMITED</p>
+    </header>
 
-<section class="hero">
+    <section class="hero">
 
-    <h2>
-        Professional Staffing for
-        <span>Hotels, Restaurants & Banquets</span>
-    </h2>
+        <h2>
+            Professional Staffing for
+            <span>Hotels, Restaurants &amp; Banquets</span>
+        </h2>
 
-    <p>
-        Reliable and trained manpower solutions for hotels,
-        restaurants, banquets and events.
-    </p>
+        <p>
+            Reliable and trained manpower solutions for hotels,
+            restaurants, banquets and events.
+        </p>
 
-    <div class="buttons">
+        <div class="buttons">
 
-        <!-- ADMIN LOGIN -->
-        <a href="/admin-login" class="btn admin-btn">
-            👨‍💼 Admin Login
-        </a>
+            <a href="/admin-login" class="btn admin-btn">
+                👨‍💼 Admin Login
+            </a>
 
-        <!-- WAITER LOGIN -->
-        <a href="/waiter-login" class="btn waiter-btn">
-            👨‍🍳 Waiter Login
-        </a>
+            <a href="/waiter-login" class="btn waiter-btn">
+                👨‍🍳 Waiter Login
+            </a>
 
-    </div>
+        </div>
 
-</section>
+    </section>
 
-<footer>
-    <p>© 2026 Singhania And Sons Films Private Limited</p>
-    <p>Mumbai, Maharashtra</p>
-</footer>
+    <section class="services">
+
+        <h2>Our Services</h2>
+
+        <p>
+            Professional manpower solutions for hospitality businesses.
+        </p>
+
+        <div class="service-boxes">
+
+            <div class="service-box">
+                <h3>👨‍🍳 Waiter Staffing</h3>
+                <p>
+                    Trained and reliable waiters for hotels,
+                    restaurants and events.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <h3>🏨 Hotel Staffing</h3>
+                <p>
+                    Professional manpower solutions for
+                    hospitality businesses.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <h3>🎉 Event Staffing</h3>
+                <p>
+                    Skilled staff for banquets, parties
+                    and special events.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 Singhania And Sons Films Private Limited
+        <br>
+        Mumbai, Maharashtra
+    </footer>
+
+
+    <!-- Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register(
+                    "{{ url_for('static', filename='sw.js') }}"
+                )
+                .then(function () {
+                    console.log("Service Worker registered successfully.");
+                })
+                .catch(function (error) {
+                    console.log("Service Worker registration failed:", error);
+                });
+            });
+        }
+    </script>
 
 </body>
-</html>
+
+</html>s
